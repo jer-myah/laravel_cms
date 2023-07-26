@@ -13,7 +13,7 @@
                                 </div>
                             </a>
                         
-                            <a href="{{ route('admin.create.page') }}" class="focus:ring-2 focus:ring-offset-2 focus:ring-teal-600 mt-4 sm:mt-0 px-4 py-3 bg-teal-700 hover:bg-teal-600 focus:outline-none rounded">
+                            <a href="{{ route('admin.pages.create') }}" class="focus:ring-2 focus:ring-offset-2 focus:ring-teal-600 mt-4 sm:mt-0 px-4 py-3 bg-teal-700 hover:bg-teal-600 focus:outline-none rounded">
                                 <p class="text-sm font-medium leading-none text-white">Add Page</p>
                             </a>
                         </div>
@@ -34,13 +34,13 @@
                                         </div>
                                     </th>
                                     <th class="p-2 border-r cursor-pointer text-sm font-thin text-gray-500">
-                                        <div class="flex items-center justify-center">
-                                            content
+                                        <div class="flex items-center justify-center capitalize">
+                                            category
                                         </div>
                                     </th>
                                     <th class="p-2 border-r cursor-pointer text-sm font-thin text-gray-500">
-                                        <div class="flex items-center justify-center">
-                                            category
+                                        <div class="flex items-center justify-center capitalize">
+                                            meta title
                                         </div>
                                     </th>
                                     <th class="p-2 border-r cursor-pointer text-sm font-thin text-gray-500">
@@ -55,11 +55,12 @@
                                     <tr class="bg-gray-100 text-center border-b text-sm text-gray-600">                                    
                                         <td class="p-2 border-r">{{ $loop->index + 1 }} </td>
                                         <td class="p-2 border-r">{{ $page->title }}</td>
-                                        <td class="p-2 border-r">{{ $page->content }}</td>
-                                        <td class="p-2 border-r">{{ $page->category->name }}</td>
+                                        <td class="p-2 border-r">@if ($page->category) {{ $page->category->name }} @else -- @endif</td>
+                                        <td class="p-2 border-r">{{ $page->meta_title }}</td>
                                         <td>
-                                            <a href="#" class="bg-blue-500 p-2 text-white hover:shadow-lg text-xs font-thin">Edit</a>
-                                            <a href="#" class="bg-red-500 p-2 text-white hover:shadow-lg text-xs font-thin">Remove</a>
+                                            <a href="{{ route('admin.pages.show', $page->id) }}" class="bg-teal-500 p-2 text-white hover:shadow-lg text-xs font-thin">View</a>
+                                            <a href="{{ route('admin.pages.edit', $page->id) }}" class="bg-blue-500 p-2 text-white hover:shadow-lg text-xs font-thin">Edit</a>
+                                            <a href="{{ route('admin.pages.destroy', $page->id) }}" class="bg-red-500 p-2 text-white hover:shadow-lg text-xs font-thin">Remove</a>
                                         </td>
                                     </tr>
                                 @endforeach                                                                

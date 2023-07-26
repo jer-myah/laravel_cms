@@ -20,6 +20,12 @@
                         </div>
                     </div>
 
+                    @if (session()->has('success'))
+                        <div class="absolute top-16 right-8">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     <div class="table w-full p-2">
                         <table class="w-full border">
                             <thead>

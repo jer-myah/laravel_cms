@@ -11,7 +11,7 @@ class CrudRepository implements CrudInterface
      */
     public function index($model)
     {
-        return $model->paginate(20);
+        return $model->all();
     }
 
     /**

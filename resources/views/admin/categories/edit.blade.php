@@ -10,7 +10,7 @@
                         <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" 
                                 method="POST" action="{{ route('admin.categories.edit', $category->id) }}">
                             @csrf
-                            {{ method_field('PUT') }}
+                            @method('PUT')
                             <div class="mb-4">
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Name</label>
                                 <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-teal-500"

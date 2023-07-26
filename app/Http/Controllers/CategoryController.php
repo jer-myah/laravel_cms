@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ class CategoryController extends Controller
         return view('admin.categories.create');        
     }
 
-    public function store (Request $request) {
+    public function store (StoreCategoryRequest $request) {
         if ($this->categoryService->createCategory($request)) {
             return redirect('/admin/categories')->with('success', 'Category created');
         } else {
@@ -36,7 +37,7 @@ class CategoryController extends Controller
         return view('admin.categories.edit')->with('category', $category);
     }
 
-    public function update (Request $request, $id) {
+    public function update (StoreCategoryRequest $request, $id) {
         if ($this->categoryService->updateCategory($request, $id)) {
             return redirect('/admin/categories')->with('success', 'Category updated');
         } else {
