@@ -14,4 +14,8 @@ class CategoryPage extends Model
         'page_id'
     ];
 
+    public function category () {
+        return $this->hasOne(Category::class);
+    }
+
 }

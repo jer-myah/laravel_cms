@@ -20,6 +20,5 @@ class Page extends Model
 
     public function categories () {
         return $this->belongsToMany(Category::class, 'category_pages');
-        // return $this->hasOneThrough(Category::class, CategoryPage::class, 'page_id', 'id');
     }
 }

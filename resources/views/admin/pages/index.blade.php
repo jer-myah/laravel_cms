@@ -70,11 +70,13 @@
                                         <td class="p-2 border-r">{{ $loop->index + 1 }} </td>
                                         <td class="p-2 border-r">{{ $page->title }}</td>
                                         <td class="p-2 border-r"> 
-                                            @if ($page->category == null) 
+                                            @if (! $page->categories->isEmpty()) 
+                                                {{ $page->categories[0]->name }}
+                                            @else
                                                 <form method="POST" action="{{ route('admin.category_page.assign') }}" class="">
                                                     @csrf
                                                     <div class="relative inline-flex">
-                                                        <select name="category_id" class="border border-gray-300 rounded-full text-gray-600 h-10 pl-2 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                                                        <select name="category_id" class="border border-gray-300 rounded-full text-gray-600 h-10 pl-2 bg-white hover:border-gray-400 focus:outline-none appearance-none" required>
                                                             <option>Select Category</option>
                                                             @foreach ($categories as $category)
                                                                 <option value="{{$category->id}}">{{ $category->name }}</option>
@@ -86,8 +88,6 @@
                                                         type="submit">Assign Category
                                                     </button>
                                                 </form>
-                                            @else
-                                                {{ $page->category->name }} 
                                             @endif
                                         </td>
                                         <td class="p-2 border-r">{{ $page->meta_title }}</td>
