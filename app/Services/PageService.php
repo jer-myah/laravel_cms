@@ -21,12 +21,12 @@ class PageService {
 
     public function getAllPages()
     {
-        return $this->crudInterface->index($this->pageModel->with('category')->get());
+        return $this->crudInterface->index($this->pageModel->with('categories')->get());
     }
 
     public function getOnePageById($id)
     {
-        return $this->crudInterface->show($this->pageModel->with('category'), $id);
+        return $this->crudInterface->show($this->pageModel->with('categories'), $id);
     }
 
     public function createPage($request)
