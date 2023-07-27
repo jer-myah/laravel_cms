@@ -15,6 +15,18 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased">
+        <nav class="shadow bg-white mx-4">
+            <div class="mx-auto p-5 flex items-center justify-between">
+                <a class="text-2xl hover:text-cyan-500 transition-colors cursor-pointer">Logo</a>
+                
+                <ul class="flex items-center gap-5">
+                    <li><a class="hover:text-cyan-500 transition-colors" href="/home">Home</a></li>
+                    <li><a class="hover:text-cyan-500 transition-colors" href="">About us</a></li>
+                    <li><a class="hover:text-cyan-500 transition-colors" href="{{ route('login') }}">Login</a></li>
+                    <li><a class="hover:text-cyan-500 transition-colors" href="{{ route('register') }}">Register</a></li>
+                </ul>
+            </div>
+        </nav>
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
                 <a href="/">

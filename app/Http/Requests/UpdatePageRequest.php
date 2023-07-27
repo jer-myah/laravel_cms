@@ -22,11 +22,30 @@ class UpdatePageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|',
+            'title' => 'required|string|max:255|min:4',
             'content' => 'required|string',
-            'meta_title' => 'required|string',
-            'meta_description' => 'required|string',
-            'meta_keywords' => 'required|string',
+            'meta_title' => 'required|string|max:255|min:4',
+            'meta_description' => 'required|string|max:255|min:4',
+            'meta_keywords' => 'required|string|max:255|min:4',
+        ];
+    }
+
+    /**
+     * Custom message for validation
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'title.required' => 'Title field is required!',
+            'title.string' => 'Title field must be string!',
+            'content.required' => 'Name is required!',
+            'meta_title.required' => 'Meta title is required!',
+            'meta_title.max' => 'Meta title is too long!',
+            'meta_description.required' => 'Meta description is required!',
+            'meta_description.max' => 'Meta description is too long!',
+            'meta_keywords.required' => 'Meta keywords is required!',
         ];
     }
 }

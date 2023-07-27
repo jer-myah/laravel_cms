@@ -29,7 +29,7 @@ class CategoryService {
     public function createCategory($request)
     {
         $data = [
-            'name' => $request->name
+            'name' => strip_tags($request->name)
         ];
 
         return $this->crudInterface->store($this->categoryModel, $data);

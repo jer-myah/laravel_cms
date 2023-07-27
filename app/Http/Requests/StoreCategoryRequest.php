@@ -22,7 +22,22 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique:categories,name'
+            'name' => 'required|alpha|unique:categories,name|min:3'
+        ];
+    }
+
+    /**
+     * Custom message for validation
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => 'Name field is required!',
+            'name.string' => 'Name must be string!',
+            'name.unique' => 'Name already exists!',
+            'name.min' => 'Name is too short!',
         ];
     }
 }

@@ -10,17 +10,14 @@ class WelcomeController extends Controller
 {
     public function welcome ($category_id = null) {
 
+        $categories = Category::get();
         if ($category_id) {
-            $categories = Category::get();
-
             $pages = Page::with('category')->where('id', $category_id)->get();
-            
-            return view('welcome')->with(['categories' => $categories, 'pages' => $pages]);
         } else {
-            $categories = Category::get();
             $pages = Page::get();
-            return view('welcome')->with(['categories' => $categories, 'pages' => $pages]);
         }
+
+        return view('welcome')->with(['categories' => $categories, 'pages' => $pages]);
     }
 
     public function page ($id) {

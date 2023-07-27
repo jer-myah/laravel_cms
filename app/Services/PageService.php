@@ -35,12 +35,12 @@ class PageService {
         $image_path = UploadToS3::imageToS3($path, $request->image);
 
         $data = [
-            'title' => $request->title,
+            'title' => strip_tags($request->title),
             'image' => $image_path,
             'content' => $request->content,
-            'meta_title' => $request->meta_title,
-            'meta_description' => $request->meta_description,
-            'meta_keywords' => $request->meta_keywords,
+            'meta_title' => strip_tags($request->meta_title),
+            'meta_description' => strip_tags($request->meta_description),
+            'meta_keywords' => strip_tags($request->meta_keywords),
         ];
 
         return $this->crudInterface->store($this->pageModel, $data);
@@ -50,11 +50,11 @@ class PageService {
     public function updatePage($request)
     {
         $data = [
-            'title' => $request->title,
+            'title' => strip_tags($request->title),
             'content' => $request->content,
-            'meta_title' => $request->meta_title,
-            'meta_description' => $request->meta_description,
-            'meta_keywords' => $request->meta_keywords,
+            'meta_title' => strip_tags($request->meta_title),
+            'meta_description' => strip_tags($request->meta_description),
+            'meta_keywords' => strip_tags($request->meta_keywords),
             'updated_at' => now()
         ];
 
