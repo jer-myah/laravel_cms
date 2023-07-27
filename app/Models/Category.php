@@ -13,4 +13,7 @@ class Category extends Model
         'name'
     ];
 
+    public function pages () {
+        return $this->belongsToMany(Page::class, 'category_pages');
+    }
 }

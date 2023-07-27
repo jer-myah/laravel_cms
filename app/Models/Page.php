@@ -18,7 +18,8 @@ class Page extends Model
         'meta_keywords',
     ];
 
-    public function category () {
-        return $this->hasOneThrough(Category::class, CategoryPage::class, 'page_id', 'id');
+    public function categories () {
+        return $this->belongsToMany(Category::class, 'category_pages');
+        // return $this->hasOneThrough(Category::class, CategoryPage::class, 'page_id', 'id');
     }
 }

@@ -32,7 +32,7 @@
             <div class="mx-auto max-w-lg">
             <h1 class="text-3xl font-bold text-gray-800 dark:text-white lg:text-4xl">{{ $page->title }}</h1>
             <p class="mt-6 text-gray-500 dark:text-gray-300">{!! $page->content !!}</p>
-            <p class="mt-3 text-sm text-gray-400"><a href="/">Go back to blog</a></p>
+            <p class="mt-3 text-sm text-gray-400"><a href="/home">Go back to blog</a></p>
             </div>
         </div>
 

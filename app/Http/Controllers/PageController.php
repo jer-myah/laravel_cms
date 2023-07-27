@@ -19,7 +19,7 @@ class PageController extends Controller
     
     public function index () {
         $pages = $this->pageService->getAllPages();
-        return view('admin.pages.index')->with('pages', $pages);
+        return view('admin.pages.index')->with(['pages' => $pages, 'categories' => Category::get()]);
     }
 
     public function create () {

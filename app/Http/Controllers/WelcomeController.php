@@ -12,7 +12,8 @@ class WelcomeController extends Controller
 
         $categories = Category::get();
         if ($category_id) {
-            $pages = Page::with('category')->where('id', $category_id)->get();
+            $category_pages = Category::where('id', $category_id)->with('pages')->first();
+            $pages = $category_pages->pages;
         } else {
             $pages = Page::get();
         }

@@ -5,7 +5,7 @@
                 @include('admin.partials.sidebar')
                 
                 <div class="w-full my-5 mx-4">
-                    @if($page->category == null)                        
+                    @if ($page->category == null)                        
                         <form method="POST" action="{{ route('admin.category_page.assign') }}" class="pb-4 border-b">
                             @csrf
                             <div class="relative inline-flex">
@@ -21,6 +21,20 @@
                                 type="submit">Assign Category
                             </button>
                         </form>
+                    @endif
+
+                    @if (session()->has('success'))
+                        <div class="bg-green-100 border-t border-b border-green-500 text-green-700 mx-8 px-4 py-3" role="alert">
+                            <p class="font-bold">Successful</p>
+                            <p class="text-sm">{{ session('success') }}</p>
+                        </div>
+                    @endif
+
+                    @if (session()->has('error'))
+                        <div class="bg-red-100 border-t border-b border-red-500 text-red-700 mx-8 px-4 py-3" role="alert">
+                            <p class="font-bold">Failed</p>
+                            <p class="text-sm">{{ session('error') }}</p>
+                        </div>
                     @endif
 
 

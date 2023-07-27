@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class CategoryPageController extends Controller
 {
     public function store (StoreCategoryPageRequest $request) {
+
         $category = CategoryPage::create([
             'category_id' => $request->category_id,
             'page_id' => $request->page_id,
