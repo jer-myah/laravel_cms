@@ -5,7 +5,7 @@
                 @include('admin.partials.sidebar')
                 
                 <div class="w-full my-5 mx-4">
-                    @if ($page->category == null)                        
+                    @if ($page->categories->isEmpty())                        
                         <form method="POST" action="{{ route('admin.category_page.assign') }}" class="pb-4 border-b">
                             @csrf
                             <div class="relative inline-flex">
