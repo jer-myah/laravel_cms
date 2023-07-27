@@ -5,7 +5,7 @@
                 @include('admin.partials.sidebar')
                 
                 <div class="w-full my-5 mx-4">
-                    @if($page->category)                        
+                    @if($page->category == null)                        
                         <form method="POST" action="{{ route('admin.category_page.assign') }}" class="pb-4 border-b">
                             @csrf
                             <div class="relative inline-flex">
@@ -23,7 +23,7 @@
                         </form>
                     @endif
 
-                    
+
                     <div class="items-center px-2">
                         <div class="flex items-center justify-between">
                             <a class=" focus:outline-none focus:ring-2">
