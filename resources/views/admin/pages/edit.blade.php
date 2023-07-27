@@ -10,6 +10,11 @@
                         <form method="POST" action="{{ route('admin.pages.update', $page->id) }}" class="w-full mx-auto bg-white p-8 rounded-md shadow-md">
                             @csrf
                             @method('PUT')
+                            @if($errors->any())
+                                @foreach ($errors->all() as $error)
+                                    <div class="-mt-2 mb-4 text-red-700">{{ $error }}</div>
+                                @endforeach
+                            @endif
                             <div class="mb-4">
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="title">Title</label>
                                 <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-teal-500"
