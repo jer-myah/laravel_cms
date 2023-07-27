@@ -26,4 +26,17 @@ class StoreCategoryPageRequest extends FormRequest
             'page_id' => 'required',
         ];
     }
+
+    /**
+     * Custom message for validation
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'category_id.required' => 'Category field is required!',
+            'page_id.required' => 'Page field is required!',
+        ];
+    }
 }

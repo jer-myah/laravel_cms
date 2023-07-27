@@ -76,8 +76,8 @@
                                                 <form method="POST" action="{{ route('admin.category_page.assign') }}" class="">
                                                     @csrf
                                                     <div class="relative inline-flex">
-                                                        <select name="category_id" class="border border-gray-300 rounded-full text-gray-600 h-10 pl-2 bg-white hover:border-gray-400 focus:outline-none appearance-none" required>
-                                                            <option>Select Category</option>
+                                                        <select name="category_id" required class="border border-gray-300 rounded-full text-gray-600 h-10 pl-2 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                                                            <option value="">Select Category</option>
                                                             @foreach ($categories as $category)
                                                                 <option value="{{$category->id}}">{{ $category->name }}</option>
                                                             @endforeach
