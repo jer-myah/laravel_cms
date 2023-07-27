@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [WelcomeController::class, 'welcome']);
+Route::get('/{category_id?}', [WelcomeController::class, 'welcome'])->name('welcome');
+Route::get('/page/{id}', [WelcomeController::class, 'page'])->name('page.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

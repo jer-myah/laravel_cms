@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Actions\HandleUpload;
+use App\Http\Requests\StorePageRequest;
+use App\Http\Requests\UpdatePageRequest;
 use App\Models\Category;
 use App\Services\PageService;
 
@@ -24,7 +26,7 @@ class PageController extends Controller
         return view('admin.pages.create');        
     }
 
-    public function store (Request $request) {
+    public function store (StorePageRequest $request) {
         if ($this->pageService->createPage($request)) {
             return redirect('/admin/pages')->with('success', 'Page created');
         } else {
@@ -42,7 +44,7 @@ class PageController extends Controller
         return view('admin.pages.edit')->with('page', $page);
     }
 
-    public function update (Request $request, $id) {
+    public function update (UpdatePageRequest $request, $id) {
         if ($this->pageService->updatePage($request, $id)) {
             return redirect('/admin/pages')->with('success', 'Page updated');
         } else {

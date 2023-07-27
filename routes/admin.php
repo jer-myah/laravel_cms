@@ -25,6 +25,7 @@ Route::middleware('auth')->group( function () {
     Route::get('/pages', [PageController::class, 'index'])->middleware('can:view-pages')->name('admin.pages.index');
     Route::get('/create-page', [PageController::class, 'create'])->middleware('can:view-pages')->name('admin.pages.create');
     Route::post('/create-page', [PageController::class, 'store'])->middleware('can:create-pages')->name('admin.pages.store');
+    // Route::post('/create-page', function (Request $request) { dd($request); })->middleware('can:create-pages')->name('admin.pages.store');
     Route::get('/edit-page/{id}', [PageController::class, 'edit'])->middleware('can:edit-pages')->name('admin.pages.edit');
     Route::put('/edit-page/{id}', [PageController::class, 'update'])->middleware('can:edit-pages')->name('admin.pages.update');
     Route::post('/upload', [PageController::class, 'uploadImage'])->middleware('can:create-pages')->name('ckeditor.upload');

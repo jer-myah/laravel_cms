@@ -21,8 +21,16 @@
                     </div>
 
                     @if (session()->has('success'))
-                        <div class="absolute top-16 right-8">
-                            {{ session('success') }}
+                        <div class="bg-green-100 border-t border-b border-green-500 text-green-700 mx-8 px-4 py-3" role="alert">
+                            <p class="font-bold">Successful</p>
+                            <p class="text-sm">{{ session('success') }}</p>
+                        </div>
+                    @endif
+
+                    @if (session()->has('error'))
+                        <div class="bg-red-100 border-t border-b border-red-500 text-red-700 mx-8 px-4 py-3" role="alert">
+                            <p class="font-bold">Failed</p>
+                            <p class="text-sm">{{ session('error') }}</p>
                         </div>
                     @endif
 

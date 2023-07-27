@@ -11,6 +11,7 @@ class Page extends Model
 
     protected $fillable = [
         'title',
+        'image',
         'content',
         'meta_title',
         'meta_description',
