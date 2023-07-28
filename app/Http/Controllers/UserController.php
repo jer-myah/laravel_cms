@@ -14,4 +14,8 @@ class UserController extends Controller
         
         return view('admin.users.index')->with('users', $users);
     }
+
+    public function changeRole () {
+        
+    }
 }
