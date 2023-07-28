@@ -56,10 +56,12 @@
                                         <td class="p-2 border-r">{{ $loop->index + 1 }} </td>
                                         <td class="p-2 border-r">{{ $user->name }}</td>
                                         <td class="p-2 border-r">{{ $user->email }}</td>
-                                        <td class="p-2 border-r">Role</td>
+                                        <td class="p-2 border-r">{{ $user->name }}</td>
                                         <td>
-                                            <a href="#" class="bg-blue-500 p-2 text-white hover:shadow-lg text-xs font-thin">Edit</a>
-                                            <a href="#" class="bg-red-500 p-2 text-white hover:shadow-lg text-xs font-thin">Remove</a>
+                                            @if ($user->name == 'Editor')
+                                                <a href="#" class="bg-blue-500 p-2 text-white hover:shadow-lg text-xs font-thin">Edit Role</a>
+                                                <a href="#" class="bg-red-500 p-2 text-white hover:shadow-lg text-xs font-thin">Remove</a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach                                                                
