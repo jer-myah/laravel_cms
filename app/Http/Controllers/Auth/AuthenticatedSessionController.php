@@ -36,7 +36,7 @@ class AuthenticatedSessionController extends Controller
             Auth::guard('web')->logout();
             $request->session()->invalidate();
 
-            return back();
+            return back()->with('status', 'You have not been assigned a role!');
         }
 
         $role = DB::table('roles')->where('id', $model_role->role_id)->first();

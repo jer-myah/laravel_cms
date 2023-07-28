@@ -33,8 +33,8 @@
                         </div>
                     @endif
 
-                    <div class="table w-full p-2">
-                        <table class="w-full border">
+                    <div class="table w-full p-2 overflow-auto">
+                        <table class="w-full border table-auto min-w-full border-collapse block md:table">
                             <thead>
                                 <tr class="bg-gray-50 border-b">
                                     <th class="p-2 border-r cursor-pointer text-sm font-thin text-gray-500">
@@ -68,7 +68,7 @@
                                 @foreach ($pages as $page)   
                                     <tr class="bg-gray-100 text-center border-b text-sm text-gray-600">                                    
                                         <td class="p-2 border-r">{{ $loop->index + 1 }} </td>
-                                        <td class="p-2 border-r">{{ $page->title }}</td>
+                                        <td class="p-2 border-r w-40 text-clip overflow-hidden">{{ $page->title }}</td>
                                         <td class="p-2 border-r"> 
                                             @if (! $page->categories->isEmpty()) 
                                                 {{ $page->categories[0]->name }}
@@ -85,12 +85,12 @@
                                                     </div>
                                                     <input type="hidden" name="page_id" value="{{ $page->id }}">
                                                     <button class="bg-teal-500 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-teal-600 transition duration-300"
-                                                        type="submit">Assign Category
+                                                        type="submit">Assign
                                                     </button>
                                                 </form>
                                             @endif
                                         </td>
-                                        <td class="p-2 border-r">{{ $page->meta_title }}</td>
+                                        <td class="p-2 border-r w-40 text-clip overflow-hidden">{{ $page->meta_title }}</td>
                                         <td>
                                             <a href="{{ route('admin.pages.show', $page->id) }}" class="bg-teal-500 p-2 text-white hover:shadow-lg text-xs font-thin">View</a>
                                             <a href="{{ route('admin.pages.edit', $page->id) }}" class="bg-blue-500 p-2 text-white hover:shadow-lg text-xs font-thin">Edit</a>
@@ -100,6 +100,8 @@
                                 @endforeach                                                                
                             </tbody>
                         </table>
+
+                        
                     </div>
                 </div>
             </div>            
