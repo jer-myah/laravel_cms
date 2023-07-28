@@ -56,20 +56,96 @@
                                         <td class="p-2 border-r">{{ $loop->index + 1 }} </td>
                                         <td class="p-2 border-r">{{ $user->name }}</td>
                                         <td class="p-2 border-r">{{ $user->email }}</td>
-                                        <td class="p-2 border-r">{{ $user->name }}</td>
+                                        <td class="p-2 border-r">{{ $user->role_name }}</td>
                                         <td>
-                                            @if ($user->name == 'Editor')
-                                                <a href="#" class="bg-blue-500 p-2 text-white hover:shadow-lg text-xs font-thin">Edit Role</a>
-                                                <a href="#" class="bg-red-500 p-2 text-white hover:shadow-lg text-xs font-thin">Remove</a>
+                                            @if ($user->role_name == 'Editor')
+                                                <button onclick="updateModal(true)" class="bg-blue-500 p-2 text-white hover:shadow-lg text-xs font-thin">Edit Role</button>
+                                                <button class="bg-red-500 p-2 text-white hover:shadow-lg text-xs font-thin">Remove</button>
                                             @endif
                                         </td>
                                     </tr>
                                 @endforeach                                                                
                             </tbody>
                         </table>
+                        {{-- modal --}}
+                        <!-- overlay -->
+                        <div id="modal_overlay" class="hidden absolute inset-0 bg-black bg-opacity-30 flex justify-center items-start md:items-center pt-10 md:pt-0">
+                            <!-- modal -->
+                            <div id="modal" class="opacity-0 transform -translate-y-full scale-150 relative bg-white rounded shadow-lg transition-opacity transition-transform duration-300">
+                            
+                                <!-- button close -->
+                                <button 
+                                    onclick="updateModal(false)"
+                                    class="absolute -top-3 -right-3 bg-red-500 hover:bg-red-600 text-2xl w-10 h-10 rounded-full focus:outline-none text-white">
+                                    &cross;
+                                </button>
+                            
+                                <!-- header -->
+                                <div class="px-4 py-3 border-b border-gray-200">
+                                    <h2 class="text-xl font-semibold text-gray-600">Change Role</h2>
+                                </div>
+                            
+                                <!-- body -->
+                                <div class="p-3">
+                                    <form class="w-full max-w-sm p-4 mx-auto bg-white rounded-md shadow-md" 
+                                            method="POST" action="">
+                                        @csrf
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Select Role</label>
+                                            <select name="role_id" required class="border border-gray-300 rounded-full text-gray-600 h-10 pl-4 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                                                <option value="">Select Role</option>
+                                                @foreach ($roles as $role)
+                                                    <option value="{{$role->id}}">{{ $role->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        @if($errors->any())
+                                            @foreach ($errors->all() as $error)
+                                                <div class="-mt-2 mb-4 text-red-700">{{ $error }}</div>
+                                            @endforeach
+                                        @endif
+                                        
+                                        <button class="w-full bg-teal-500 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-teal-600 transition duration-300"
+                                            type="submit">Update
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+    
                     </div>
                 </div>
             </div>            
         </div>
     </div>
-</x-app-layout>
+
+    
+<script>
+    const modal_overlay = document.querySelector('#modal_overlay');
+    const modal = document.querySelector('#modal');
+    
+    function updateModal (value){
+        const modalCl = modal.classList
+        const overlayCl = modal_overlay
+    
+        if(value){
+            overlayCl.classList.remove('hidden')
+            setTimeout(() => {
+                modalCl.remove('opacity-0')
+                modalCl.remove('-translate-y-full')
+                modalCl.remove('scale-150')
+            }, 100);
+        } else {
+            modalCl.add('-translate-y-full')
+            setTimeout(() => {
+                modalCl.add('opacity-0')
+                modalCl.add('scale-150')
+            }, 100);
+            setTimeout(() => overlayCl.classList.add('hidden'), 300);
+            }
+        }
+        updateModal(false);
+    </script>
+
+    </x-app-layout>
