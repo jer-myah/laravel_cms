@@ -11,8 +11,7 @@
                                 <div class="py-2 px-8 text-gray-700 ">
                                     <p>Users</p>
                                 </div>
-                            </a>
-                            
+                            </a>                            
                         
                             <button class="focus:ring-2 focus:ring-offset-2 focus:ring-teal-600 mt-4 sm:mt-0 px-4 py-3 bg-teal-700 hover:bg-teal-600 focus:outline-none rounded">
                                 <p class="text-sm font-medium leading-none text-white">Add User</p>
@@ -41,6 +40,11 @@
                                     </th>
                                     <th class="p-2 border-r cursor-pointer text-sm font-thin text-gray-500">
                                         <div class="flex items-center justify-center">
+                                            Role
+                                        </div>
+                                    </th>
+                                    <th class="p-2 border-r cursor-pointer text-sm font-thin text-gray-500">
+                                        <div class="flex items-center justify-center">
                                             Action
                                         </div>
                                     </th>
@@ -52,6 +56,7 @@
                                         <td class="p-2 border-r">{{ $loop->index + 1 }} </td>
                                         <td class="p-2 border-r">{{ $user->name }}</td>
                                         <td class="p-2 border-r">{{ $user->email }}</td>
+                                        <td class="p-2 border-r">Role</td>
                                         <td>
                                             <a href="#" class="bg-blue-500 p-2 text-white hover:shadow-lg text-xs font-thin">Edit</a>
                                             <a href="#" class="bg-red-500 p-2 text-white hover:shadow-lg text-xs font-thin">Remove</a>

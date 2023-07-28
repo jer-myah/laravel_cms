@@ -44,7 +44,7 @@ class AuthenticatedSessionController extends Controller
             return redirect('/admin');
         }
         
-        return redirect('/home');
+        return redirect('/dashboard');
     }
 
     /**
@@ -58,6 +58,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/home');
     }
 }
