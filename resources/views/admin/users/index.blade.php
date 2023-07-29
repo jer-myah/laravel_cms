@@ -60,14 +60,14 @@
                                         <td>
                                             @if ($user->role_name == 'Editor')
                                                 <button onclick="updateModal(true)" class="bg-blue-500 p-2 text-white hover:shadow-lg text-xs font-thin">Edit Role</button>
-                                                <button class="bg-red-500 p-2 text-white hover:shadow-lg text-xs font-thin">Remove</button>
+                                                <button onclick="deleteModal(true)" class="bg-red-500 p-2 text-white hover:shadow-lg text-xs font-thin">Remove</button>
                                             @endif
                                         </td>
                                     </tr>
                                 @endforeach                                                                
                             </tbody>
                         </table>
-                        {{-- modal --}}
+                        {{-- Edit modal --}}
                         <!-- overlay -->
                         <div id="modal_overlay" class="hidden absolute inset-0 bg-black bg-opacity-30 flex justify-center items-start md:items-center pt-10 md:pt-0">
                             <!-- modal -->
@@ -113,6 +113,43 @@
                                 </div>
                             </div>
                         </div>
+
+                        {{-- Delete modal --}}
+                        <div id="del_modal_overlay" class="hidden absolute inset-0 bg-black bg-opacity-30 flex justify-center items-start md:items-center pt-10 md:pt-0">
+                            <!-- modal -->
+                            <div id="del_modal" class="opacity-0 transform -translate-y-full scale-150 relative bg-white rounded shadow-lg transition-opacity transition-transform duration-300">
+                            
+                                <!-- button close -->
+                                <button 
+                                    onclick="deleteModal(false)"
+                                    class="absolute -top-3 -right-3 bg-red-500 hover:bg-red-600 text-2xl w-10 h-10 rounded-full focus:outline-none text-white">
+                                    &cross;
+                                </button>
+                            
+                                <!-- header -->
+                                <div class="px-4 py-3 border-b border-gray-200">
+                                    <h2 class="text-xl font-semibold text-gray-600">Delete User</h2>
+                                </div>
+                            
+                                <!-- body -->
+                                <div class="p-3">
+                                    <div class="w-full max-w-sm p-4 mx-auto bg-white rounded-md shadow-md">                                        
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Are you sure?</label>
+                                            
+                                        </div>                                       
+                                        <div class="flex justify-between">
+                                            <a href="{{ route('admin.users.delete', $user->id) }}" class="w-full bg-teal-500 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-teal-600 transition duration-300">
+                                                Delete
+                                            </a>
+                                            <button onclick="deleteModal(false)" class="ml-4 w-full bg-red-500 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-red-600 transition duration-300"
+                                                type="button">Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
     
                     </div>
                 </div>
@@ -143,9 +180,34 @@
                 modalCl.add('scale-150')
             }, 100);
             setTimeout(() => overlayCl.classList.add('hidden'), 300);
-            }
         }
-        updateModal(false);
+    }
+    updateModal(false);
+
+    const del_modal_overlay = document.querySelector('#del_modal_overlay');
+    const del_modal = document.querySelector('#del_modal');
+
+    function deleteModal (value){
+        const del_modalCl = del_modal.classList
+        const del_overlayCl = del_modal_overlay
+    
+        if(value){
+            del_overlayCl.classList.remove('hidden')
+            setTimeout(() => {
+                del_modalCl.remove('opacity-0')
+                del_modalCl.remove('-translate-y-full')
+                del_modalCl.remove('scale-150')
+            }, 100);
+        } else {
+            del_modalCl.add('-translate-y-full')
+            setTimeout(() => {
+                del_modalCl.add('opacity-0')
+                del_modalCl.add('scale-150')
+            }, 100);
+            setTimeout(() => del_overlayCl.classList.add('hidden'), 300);
+        }
+    }
+    deleteModal(false);
     </script>
 
     </x-app-layout>

@@ -15,6 +15,7 @@ Route::middleware('auth')->group( function () {
 
     Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
     Route::put('/users/update-role', [UserController::class, 'updateRole'])->name('admin.user_role.update');
+    Route::get('/users/delete/{id}', [UserController::class, 'destroy'])->name('admin.users.delete');
 
     Route::get('/categories', [CategoryController::class, 'index'])->middleware('can:view-categories')->name('admin.categories.index');
     Route::get('/create-category', [CategoryController::class, 'create'])->middleware('can:view-categories')->name('admin.categories.create');

@@ -8,6 +8,9 @@ use App\Http\Requests\StorePageRequest;
 use App\Http\Requests\UpdatePageRequest;
 use App\Models\Category;
 use App\Services\PageService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class PageController extends Controller
 {
@@ -17,16 +20,16 @@ class PageController extends Controller
         $this->pageService = $pageService;
     }
     
-    public function index () {
+    public function index (): View {
         $pages = $this->pageService->getAllPages(); 
         return view('admin.pages.index')->with(['pages' => $pages, 'categories' => Category::get()]);
     }
 
-    public function create () {
+    public function create () : View {
         return view('admin.pages.create');        
     }
 
-    public function store (StorePageRequest $request) {
+    public function store (StorePageRequest $request): RedirectResponse {
         if ($this->pageService->createPage($request)) {
             return redirect('/admin/pages')->with('success', 'Page created');
         } else {
@@ -34,17 +37,17 @@ class PageController extends Controller
         }
     }
 
-    public function show ($id) {
+    public function show ($id): View {
         $page = $this->pageService->getOnePageById($id);
         return view('admin.pages.show')->with(['page' => $page, 'categories' => Category::all()]);
     }
 
-    public function edit ($id) {
+    public function edit ($id): View {
         $page = $this->pageService->getOnePageById($id);
         return view('admin.pages.edit')->with('page', $page);
     }
 
-    public function update (UpdatePageRequest $request, $id) {
+    public function update (UpdatePageRequest $request, $id): RedirectResponse {
         if ($this->pageService->updatePage($request, $id)) {
             return redirect('/admin/pages')->with('success', 'Page updated');
         } else {
@@ -52,7 +55,7 @@ class PageController extends Controller
         }
     }
 
-    public function destroy ($id) {
+    public function destroy ($id): RedirectResponse {
         if ($this->pageService->deletePage($id)) {
             return redirect('/admin/pages')->with('success', 'Page removed');
         } else {
@@ -60,7 +63,7 @@ class PageController extends Controller
         }
     }
 
-    public function uploadImage (Request $request) {
+    public function uploadImage (Request $request): JsonResponse {
         if ($request->hasFile('upload')) {
             
             $paths = HandleUpload::uploadImage($request);

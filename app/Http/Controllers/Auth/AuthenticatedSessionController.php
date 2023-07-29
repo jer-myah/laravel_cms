@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -33,10 +34,7 @@ class AuthenticatedSessionController extends Controller
         $model_role = DB::table('model_has_roles')->where('model_id', (auth()->user()->id))->first();
         
         if ($model_role == null) {
-            Auth::guard('web')->logout();
-            $request->session()->invalidate();
-
-            return back()->with('status', 'You have not been assigned a role!');
+            return redirect('/acknowledge')->with('status', 'You have not been assigned a role!');
         }
 
         $role = DB::table('roles')->where('id', $model_role->role_id)->first();

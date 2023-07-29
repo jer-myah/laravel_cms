@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/home/{category_id?}', [WelcomeController::class, 'welcome'])->name('welcome');
 Route::get('/page/{id}', [WelcomeController::class, 'page'])->name('page.show');
+Route::get('/ackonowledge', function () {
+    return view('auth.acknowledge');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
