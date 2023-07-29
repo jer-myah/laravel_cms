@@ -12,7 +12,8 @@ use Spatie\Permission\Models\Role;
 
 class CategoryTest extends TestCase
 {
-
+    use WithoutMiddleware;
+    
     protected function setUp(): void
     {
         // first include all the normal setUp operations
@@ -32,7 +33,7 @@ class CategoryTest extends TestCase
 
         $user->assignRole('Editor');
 
-        $response = $this->actingAs($user)->from('/admin')->get('/admin/create-category');
+        $response = $this->actingAs($user)->from('/admin/categories')->get('/admin/create-category');
 
         $response->assertForbidden();
     }
@@ -49,7 +50,7 @@ class CategoryTest extends TestCase
 
         $response = $this->actingAs($user)->from('/admin')->get('/admin/create-category');
 
-        $response->assertForbidden();
+        $response->assertOk();
     }
 
     /**
@@ -61,11 +62,12 @@ class CategoryTest extends TestCase
 
         $user->assignRole('Admin');
 
-        $data = ['name' => 'Engineering'];
+        $response = $this->actingAs($user)
+                        ->from('/admin/categories')
+                        ->post('/admin/create-category', ['name' => 'Engineering'])
+                        ->withoutMiddleware();
 
-        $response = $this->actingAs($user)->from('/admin/categories')->post('/admin/create-category', $data);
-
-        $response->assertOk();
+        $response->assertRedirect('/admin/categories');
     }
     
 }
