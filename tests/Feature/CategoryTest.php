@@ -61,7 +61,27 @@ class CategoryTest extends TestCase
 
         $response
             ->assertRedirect('/admin/categories');
+        
+        $this->assertAuthenticated();
         $this->assertNotEmpty($user);
     }
     
+
+    /**
+     * Test only admin can update category
+     */
+    public function test_admin_can_update_category(): void
+    {
+        $user = User::where('email', 'admin@example.com')->first();
+
+        $response = $this->actingAs($user)
+                        ->from(route('admin.categories.edit', 1))
+                        ->put(route('admin.categories.update', 1), ['name' => 'Marketing']);
+
+        $response
+            ->assertRedirect('/admin/categories');
+        
+        $this->assertAuthenticated();
+        $this->assertNotEmpty($user);
+    }
 }
